@@ -84,7 +84,6 @@ function populateEnteredWords(arr) {
     elem.classList.add("entered-word");
     elem.textContent = capitalizeInitial(word);
     entered_words.insertBefore(elem, entered_words.firstChild);
-    window.game.current_score += getScore(word);
   }
 }
 
@@ -103,6 +102,9 @@ function addWordsToEntered() {
     window.game.entered = getCookie();
     window.game.current_score = 0;
     populateEnteredWords(cookie_entered);
+    for (word of window.game.entered) {
+      window.game.current_score += getScore(word);
+    }
     changeProgress(window.game.current_score);
   }
 }
@@ -196,7 +198,11 @@ function showMessage(message, message_type) {
 function setUpKeyboardInput() {
   document.addEventListener("keydown", function (e) {
     // Only input letters or recognize backspaces and enter keys.
-    if (!window.game.popup_active) {
+    // Don't recognize it when popups or dropdown are active.
+    if (
+      !window.game.popup_active &&
+      !element("entered-toggle").classList.contains("entered-toggle-expanded")
+    ) {
       if (isLetter(e.key)) {
         addLetterEntry(e.key);
       } else if (e.key == "Backspace") {
