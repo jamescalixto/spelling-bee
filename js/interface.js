@@ -44,7 +44,7 @@ function changeProgress(progress) {
       }
 
       // Trigger victory if we get to the highest rank.
-      if (i == 0) {
+      if (i == 0 && window.game.show_victory_popup) {
         showVictoryPopup();
       }
 
@@ -465,6 +465,29 @@ function hideAboutPopup() {
   setBlur(false);
 }
 
+// Set up victory popup.
+function setUpVictoryPopup() {
+  let target = getTomorrowDate();
+  let countdown_interval = setInterval(function () {
+    let now = new Date().getTime();
+    let dt = target - now;
+
+    let hours = Math.floor((dt % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((dt % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((dt % (1000 * 60)) / 1000);
+
+    document.getElementById("victory-countdown-span").textContent =
+      hours + "h " + minutes + "m " + seconds + "s";
+
+    if (dt < 0) {
+      clearInterval(countdown_interval);
+      document.getElementById("victory-countdown-span").textContent =
+        "a sec— actually, it's midnight! Refresh the page";
+      location.reload();
+    }
+  }, 1000);
+}
+
 // Show victory popup.
 function showVictoryPopup() {
   element("victory-popup").classList.remove("hidden");
@@ -473,6 +496,7 @@ function showVictoryPopup() {
   element("victory-words").textContent = window.game.entered.length + " words";
   element("victory-points").textContent = window.game.current_score + " points";
   setBlur(true);
+  window.game.show_victory_popup = false;
 }
 
 // Hide about popup.

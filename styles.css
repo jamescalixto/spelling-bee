@@ -468,11 +468,23 @@ body {
   width: 50%;
 }
 
-#victory-text {
-  margin: 10px auto 50px auto;
+#victory-text,
+#victory-countdown {
   width: 70%;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   color: var(--color-text-gray);
+}
+
+#victory-text {
+  margin: 10px auto 20px auto;
+}
+
+#victory-countdown {
+  margin: 10px auto 40px auto;
+}
+
+#victory-countdown-span {
+  color: var(--color-highlight);
 }
 
 #reset-text {

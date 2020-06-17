@@ -33,12 +33,14 @@ function newGame(data, seed = 0) {
   window.game.words = getWords(window.game.data, window.game.pangram); // valid words that can be entered into the puzzle.
   window.game.entered = new Array(); // words that have been entered into the puzzle.
   window.game.popup_active = false; // flag to indicate if popup is active.
+  window.game.show_victory_popup = true; // flag to indicate whether we should show victory popup.
 
   changeProgress(0); // reset progress bar to 0.
   addWordsToEntered();
   setUpDropdown();
   setUpScreenKeys(window.game.pangram, true);
   setUpProgressPopup();
+  setUpVictoryPopup();
 }
 
 // Test if a key is a letter.
