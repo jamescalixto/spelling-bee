@@ -458,27 +458,33 @@ body {
   color: var(--color-text-gray);
 }
 
-#victory-img {
+#victory-img,
+#all-img {
   margin: 50px auto 0px auto;
   width: 50%;
 }
 
 #victory-text,
-#victory-countdown {
+#victory-countdown,
+#all-text,
+#all-countdown {
   width: 70%;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   color: var(--color-text-gray);
 }
 
-#victory-text {
+#victory-text,
+#all-text {
   margin: 10px auto 20px auto;
 }
 
-#victory-countdown {
+#victory-countdown,
+#all-countdown {
   margin: 10px auto 40px auto;
 }
 
-#victory-countdown-span {
+#victory-countdown-span,
+#all-countdown-span {
   color: var(--color-highlight);
 }
 

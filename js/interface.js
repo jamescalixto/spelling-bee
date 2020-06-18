@@ -37,7 +37,10 @@ function changeProgress(progress) {
       }
 
       // Trigger victory if we get to the highest rank.
-      if (i == 0 && window.game.show_victory_popup) {
+      if (progress == maximum && window.game.show_all_popup) {
+        showAllPopup();
+        window.game.showVictoryPopup = false;
+      } else if (i == 0 && window.game.show_victory_popup) {
         showVictoryPopup();
       }
 
@@ -540,7 +543,7 @@ function hideResetPopup() {
 }
 
 // Set up victory popup.
-function setUpVictoryPopup() {
+function setUpCountdown(elem) {
   let target = getDateWithOffset(1);
   let countdown_interval = setInterval(function () {
     let now = new Date().getTime();
@@ -550,16 +553,21 @@ function setUpVictoryPopup() {
     let minutes = Math.floor((dt % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((dt % (1000 * 60)) / 1000);
 
-    document.getElementById("victory-countdown-span").textContent =
+    document.getElementById(elem).textContent =
       hours + "h " + minutes + "m " + seconds + "s";
 
     if (dt < 0) {
       clearInterval(countdown_interval);
-      document.getElementById("victory-countdown-span").textContent =
+      document.getElementById(elem).textContent =
         "a sec— actually, it's midnight! Refresh the page";
       location.reload();
     }
   }, 1000);
+}
+
+// Set up victory popup.
+function setUpVictoryPopup() {
+  setUpCountdown("victory-countdown-span");
 }
 
 // Show victory popup.
@@ -577,6 +585,29 @@ function showVictoryPopup() {
 function hideVictoryPopup() {
   element("popup-click-bg").classList.add("hidden");
   element("victory-popup").classList.add("hidden");
+  setBlur(false);
+}
+
+// Set up all popup.
+function setUpAllPopup() {
+  setUpCountdown("all-countdown-span");
+  element("all-words").textContent = window.game.words.length + " words";
+  element("all-points").textContent = window.game.total_score + " points";
+}
+
+// Show all popup.
+function showAllPopup() {
+  element("all-popup").classList.remove("hidden");
+  element("popup-click-bg").classList.remove("hidden");
+  element("popup-click-bg").onclick = hideAllPopup;
+  setBlur(true);
+  window.game.show_all_popup = false;
+}
+
+// Hide all popup.
+function hideAllPopup() {
+  element("popup-click-bg").classList.add("hidden");
+  element("all-popup").classList.add("hidden");
   setBlur(false);
 }
 

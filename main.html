@@ -232,6 +232,15 @@
       </div>
       <span id="popup-exit-alt" onclick="hideVictoryPopup()"></span>
     </div>
+    <div id="all-popup" class="popup hidden">
+      <div id="popup-content-alt">
+        <img id="all-img" src="img/fireworks.svg">
+        <h1>Spectacular!</h1>
+        <p id="all-text">You've found all <b id="all-words"></b>, worth <b id="all-points"></b>. Truly incredible.</p>
+        <p id="all-countdown">Check back in <b id="all-countdown-span">a bit</b> for a new puzzle.</p>
+      </div>
+      <span id="popup-exit-alt" onclick="hideAllPopup()"></span>
+    </div>
 
     <script>
       // Prevent backspace from navigating page.
