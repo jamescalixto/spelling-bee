@@ -5,26 +5,16 @@ function element(el) {
 
 // Reset cookie and create new game.
 function resetGame() {
-  function deleteAllCookies() {
-    var cookies = document.cookie.split(";");
-
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-      var eqPos = cookie.indexOf("=");
-      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-  }
   deleteAllCookies();
   newGame(window.game.data);
   hideResetPopup();
 }
 
 // Generate new game given data and a seed.
-function newGame(data, seed = 0) {
+function newGame(data) {
   window.game = new Object();
   window.game.data = data; // all words.
-  window.game.pangram = getTargetPangram(window.game.data, seed); // the chosen pangram.
+  window.game.pangram = getTargetPangram(window.game.data); // the chosen pangram.
   window.game.current_score = 0; // current score.
   window.game.total_score = getTotalScore(
     window.game.data,
@@ -39,6 +29,7 @@ function newGame(data, seed = 0) {
   addWordsToEntered();
   setUpDropdown();
   setUpScreenKeys(window.game.pangram, true);
+  setUpPrevPopup();
   setUpProgressPopup();
   setUpVictoryPopup();
 }
@@ -50,31 +41,60 @@ function isLetter(key) {
   );
 }
 
+// Get today's date with HH/MM/SS blanked out, plus some offset of days.
+function getDateWithOffset(offset = 0) {
+  let today = new Date();
+  today.setHours(0);
+  today.setMinutes(0);
+  today.setSeconds(0);
+  today.setMilliseconds(0);
+  let tomorrow = today.setDate(today.getDate() + offset);
+  return new Date(tomorrow);
+}
+
+// Get the number of days between a provided date (defaulting to today) and January 1,
+// 1970, taking an optional number of days as an offset.
+function getDayNumber(offset = 0) {
+  let d = getDateWithOffset(offset);
+  let DAYS_TO_MILLISECONDS = 24 * 60 * 60 * 1000;
+  return Math.floor(d.getTime() / DAYS_TO_MILLISECONDS);
+}
+
 // Save entered words to cookie.
 function setCookie() {
   let entered_words = window.game.entered.join("|");
   document.cookie =
-    "pangram=" +
-    window.game.pangram +
+    getDayNumber() +
+    "-entered=" +
+    entered_words +
     "; expires=" +
-    getTomorrowDate().toUTCString();
-  document.cookie =
-    "entered=" + entered_words + "; expires=" + getTomorrowDate().toUTCString();
+    getDateWithOffset(2).toUTCString();
 }
 
-// Load entered words from cookie.
-function getCookie() {
+// Load entered words from cookie, with an offset to specify which day.
+function getCookie(offset = 0) {
   let raw_cookie = document.cookie.split(";");
   if (document.cookie.length == 0) {
-    return null;
+    return new Array();
   }
-  let pangram = raw_cookie[0].slice(raw_cookie[0].indexOf("=") + 1);
-  let entered_words = raw_cookie[1]
-    .slice(raw_cookie[1].indexOf("=") + 1)
-    .split("|");
-  if (pangram == window.game.pangram) {
-    return entered_words;
-  } else {
-    return null;
+  for (cookie of raw_cookie) {
+    let cookie_day = cookie.trim().split("-")[0];
+    if (cookie_day == getDayNumber(offset)) {
+      return cookie.trim().split("=")[1].split("|");
+    }
+  }
+
+  return new Array();
+}
+
+// Delete all cookies.
+function deleteAllCookies() {
+  var cookies = document.cookie.split(";");
+
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    var eqPos = cookie.indexOf("=");
+    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
 }

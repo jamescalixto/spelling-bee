@@ -22,11 +22,9 @@
         <h1>Spelling Bee</h1>
         <h2>
           <a href="#" onclick="showHelpPopup();return false;">help</a> |
-          <a href="https://github.com/jamescalixto/spelling-bee" target="_blank"
-            >git</a
-          >
-          |
-          <a href="#" onclick="showAboutPopup();return false;">about</a> | <a href="#" onclick="showResetPopup();return false;">reset</a> 
+          <a href="#" onclick="showAboutPopup();return false;">about</a> | 
+          <a href="#" onclick="showPrevPopup();return false;">prev</a> | 
+          <a href="#" onclick="showResetPopup();return false;">reset</a> 
         </h2>
       </div>
     </header>
@@ -122,8 +120,9 @@
     </div>
 
     <div id="popup-click-bg" class="hidden"></div>
+
     <div id="help-popup" class="popup hidden">
-      <div id="popup-content">
+      <div class="popup-content">
         <div class="popup-heading">Instructions</div>
         <div class="popup-content-text">
           <p>Create words using the letters shown.
@@ -151,8 +150,9 @@
       </div>
       <span id="popup-exit" onclick="hideHelpPopup()"></span>
     </div>
+
     <div id="progress-popup" class="popup hidden">
-      <div id="popup-content">
+      <div class="popup-content">
         <div class="popup-heading">Rankings</div>
         <div class="popup-content-text">
           <p>The points required for each rank are fixed percentages of the maximum number of points for each puzzle.</p>
@@ -164,15 +164,17 @@
       </div>
       <span id="popup-exit" onclick="hideProgressPopup()"></span>
     </div>
+
     <div id="about-popup" class="popup hidden">
-      <div id="popup-content">
+      <div class="popup-content">
         <div class="popup-heading">About</div>
         <div class="popup-content-text">
           <p>
             Spelling Bee was made by <a href="https://jamescalixto.com/" target="_blank">James Calixto</a>, inspired by the
             <a href="https://www.nytimes.com/puzzles/spelling-bee" target="_blank"
               >New York Times puzzle</a
-            >.
+            >. Check out the source on <a href="https://github.com/jamescalixto/spelling-bee" target="_blank"
+            >GitHub</a>.
           </p>
           <p>
             Word lists are from <a href="http://wordlist.aspell.net/" target="_blank">SCOWL</a>,
@@ -192,15 +194,22 @@
       </div>
       <span id="popup-exit" onclick="hideAboutPopup()"></span>
     </div>
-    <div id="victory-popup" class="popup hidden">
-      <div id="popup-content-alt">
-        <img id="victory-img" src="img/victory.svg">
-        <h1>Excellent work!</h1>
-        <p id="victory-text">You've reached the highest rank, with <b id="victory-words"></b> and <b id="victory-points"></b>.</p>
-        <p id="victory-countdown">Check back in <b id="victory-countdown-span">a bit</b> for a new puzzle.</p>
+
+    <div id="prev-popup" class="popup hidden">
+      <div class="popup-content">
+        <div class="popup-heading">Yesterday's answers
+        </div>
+        <div class="popup-content-text">
+          <div id="prev-letters-container"></div>
+          <div id="prev-words-container"></div>
+        </div>
+        <p class="popup-content-text">
+          Highlighted letters indicate the required letter. Highlighted words indicate pangrams. <span id="popup-content-text-entered" class="hidden">Bolded words indicate the words you entered.</span>
+        </p>
       </div>
-      <span id="popup-exit-alt" onclick="hideVictoryPopup()"></span>
+      <span id="popup-exit" onclick="hideAboutPopup()"></span>
     </div>
+
     <div id="reset-popup" class="popup hidden">
       <div id="popup-content-alt">
         <h1>Reset</h1>
@@ -211,9 +220,17 @@
         <button id="button-reset" type="button" class="reset-button reset-button-action" onclick="resetGame()">
           Reset
         </button>
-
       </div>
       <span id="popup-exit-alt" onclick="hideResetPopup()"></span>
+    </div>
+    <div id="victory-popup" class="popup hidden">
+      <div id="popup-content-alt">
+        <img id="victory-img" src="img/victory.svg">
+        <h1>Excellent work!</h1>
+        <p id="victory-text">You've reached the highest rank, with <b id="victory-words"></b> and <b id="victory-points"></b>.</p>
+        <p id="victory-countdown">Check back in <b id="victory-countdown-span">a bit</b> for a new puzzle.</p>
+      </div>
+      <span id="popup-exit-alt" onclick="hideVictoryPopup()"></span>
     </div>
 
     <script>

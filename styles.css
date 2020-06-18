@@ -277,14 +277,6 @@ body {
   font-size: 1.7em;
 }
 
-.highlight {
-  color: var(--color-highlight);
-}
-
-.invalid {
-  color: var(--color-invalid);
-}
-
 #entry-container-holder::after {
   content: "";
   display: inline-block;
@@ -409,7 +401,7 @@ body {
   box-shadow: 0 4px 24px var(--color-gray);
 }
 
-#popup-content {
+.popup-content {
   display: flex;
   max-width: 90%;
   flex-wrap: wrap;
@@ -425,8 +417,9 @@ body {
 
 #popup-exit {
   display: flex;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  min-width: 12px;
+  height: 12px;
   flex-grow: 1;
   flex-basis: 10%;
   position: relative;
@@ -440,8 +433,9 @@ body {
 
 #popup-exit-alt {
   position: absolute;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  min-width: 12px;
+  height: 12px;
   top: 15px;
   right: 15px;
   background: url(img/exit.svg) center no-repeat;
@@ -458,6 +452,7 @@ body {
 }
 
 .popup-content-text {
+  width: 100%;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 0.8em;
   color: var(--color-text-gray);
@@ -485,6 +480,32 @@ body {
 
 #victory-countdown-span {
   color: var(--color-highlight);
+}
+
+#prev-letters-container {
+  margin: 10px auto 15px auto;
+  text-align: center;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--color-text-gray);
+}
+
+.prev-entered-letter {
+  font-size: 1.1em;
+  margin: 0px 3px;
+}
+
+#prev-words-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px auto 16px auto;
+}
+
+.prev-entered-word {
+  font-size: 1.1em;
+  margin: 0px 2px;
+  padding: 0px 2px;
 }
 
 #reset-text {
@@ -522,6 +543,22 @@ body {
 
 .hidden {
   display: none;
+}
+
+.bolded {
+  font-weight: 700;
+}
+
+.highlight {
+  color: var(--color-highlight);
+}
+
+.highlight-background {
+  background-color: var(--color-highlight);
+}
+
+.invalid {
+  color: var(--color-invalid);
 }
 
 @keyframes blink {

@@ -12,13 +12,6 @@ const LEVEL_NAMES = [
   "Beginner",
 ];
 
-// Reset game.
-function resetGame() {
-  window.game.current_score = 0;
-  window.game.entered = new Array();
-  changeProgress(0);
-}
-
 // Change progress bar progress.
 function changeProgress(progress) {
   let maximum = window.game.total_score;
@@ -209,6 +202,9 @@ function setUpKeyboardInput() {
         removeLetterEntry();
       } else if (e.key == "Enter") {
         enterWord();
+      } else if (e.keyCode == 32) {
+        event.preventDefault();
+        shuffleScreenKeys();
       }
     }
   });
@@ -465,9 +461,87 @@ function hideAboutPopup() {
   setBlur(false);
 }
 
+// Set up prev popup.S
+function setUpPrevPopup() {
+  // Get yesterday's entered words, if they are present.
+  let prev_entered = new Set(getCookie(-1));
+  if (prev_entered.size != 0) {
+    element("popup-content-text-entered").classList.remove("hidden");
+  }
+
+  // Show pangram.
+  let prev_pangram = getTargetPangram(window.game.data, -1);
+  let prev_pangram_set = new Set(prev_pangram);
+  let prev_pangram_array = Array.from(prev_pangram_set);
+  prev_pangram_array.sort((a, b) =>
+    a.localeCompare(b, undefined, { sensitivity: "base" })
+  );
+
+  let prev_letters_container = element("prev-letters-container");
+  for (letter of prev_pangram_array) {
+    let elem = document.createElement("span");
+    elem.classList.add("prev-entered-letter");
+    if (letter == letter.toUpperCase()) {
+      elem.classList.add("highlight");
+    }
+    elem.textContent = letter.toUpperCase();
+    prev_letters_container.appendChild(elem);
+  }
+
+  // Show words.
+  let prev_words = getWords(window.game.data, prev_pangram);
+  prev_words.sort((a, b) =>
+    a.localeCompare(b, undefined, { sensitivity: "base" })
+  );
+  let prev_words_container = element("prev-words-container");
+  for (word of prev_words) {
+    let elem = document.createElement("span");
+    elem.classList.add("prev-entered-word");
+    let word_set = new Set(word);
+    if (word_set.size == 7) {
+      elem.classList.add("highlight-background");
+    }
+    if (prev_entered.has(word.toUpperCase())) {
+      elem.classList.add("bolded");
+    }
+    elem.textContent = capitalizeInitial(word);
+    prev_words_container.appendChild(elem);
+  }
+}
+
+// Show prev popup.
+function showPrevPopup() {
+  element("prev-popup").classList.remove("hidden");
+  element("popup-click-bg").classList.remove("hidden");
+  element("popup-click-bg").onclick = hidePrevPopup;
+  setBlur(true);
+}
+
+// Hide prev popup.
+function hidePrevPopup() {
+  element("popup-click-bg").classList.add("hidden");
+  element("prev-popup").classList.add("hidden");
+  setBlur(false);
+}
+
+// Show about popup.
+function showResetPopup() {
+  element("reset-popup").classList.remove("hidden");
+  element("popup-click-bg").classList.remove("hidden");
+  element("popup-click-bg").onclick = hideResetPopup;
+  setBlur(true);
+}
+
+// Hide about popup.
+function hideResetPopup() {
+  element("popup-click-bg").classList.add("hidden");
+  element("reset-popup").classList.add("hidden");
+  setBlur(false);
+}
+
 // Set up victory popup.
 function setUpVictoryPopup() {
-  let target = getTomorrowDate();
+  let target = getDateWithOffset(1);
   let countdown_interval = setInterval(function () {
     let now = new Date().getTime();
     let dt = target - now;
@@ -503,21 +577,6 @@ function showVictoryPopup() {
 function hideVictoryPopup() {
   element("popup-click-bg").classList.add("hidden");
   element("victory-popup").classList.add("hidden");
-  setBlur(false);
-}
-
-// Show about popup.
-function showResetPopup() {
-  element("reset-popup").classList.remove("hidden");
-  element("popup-click-bg").classList.remove("hidden");
-  element("popup-click-bg").onclick = hideResetPopup;
-  setBlur(true);
-}
-
-// Hide about popup.
-function hideResetPopup() {
-  element("popup-click-bg").classList.add("hidden");
-  element("reset-popup").classList.add("hidden");
   setBlur(false);
 }
 

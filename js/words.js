@@ -7,37 +7,9 @@ function print(val) {
   console.log(val);
 }
 
-// Get today's date with HH/MM/SS blanked out.
-function getDate() {
-  let today = new Date();
-  today.setHours(0);
-  today.setMinutes(0);
-  today.setSeconds(0);
-  today.setMilliseconds(0);
-  return today;
-}
-
-// Get tomorrow's date with HH/MM/SS blanked out.
-function getTomorrowDate() {
-  let today = getDate();
-  let tomorrow = today.setDate(today.getDate() + 1);
-  return new Date(tomorrow);
-}
-
-// Get the number of days between a provided date (defaulting to today) and January 1,
-// 1970.
-function getDayNumber(d = getDate()) {
-  let DAYS_TO_MILLISECONDS = 24 * 60 * 60 * 1000;
-  return Math.floor(d.getTime() / DAYS_TO_MILLISECONDS);
-}
-
-// Given an integer N and a seed, shuffle (pseudorandomly) an array with the numbers 0
-// through N-1.
-function getShuffledArray(n, seed = 0) {
+// Shuffle an array and return it.
+function shuffleArray(arr, seed = 0) {
   let rng = new alea(seed);
-  arr = Array(n)
-    .fill()
-    .map((x, i) => i);
   for (let i = arr.length - 1; i > 0; i--) {
     let j = Math.floor(rng() * i);
     let temp = arr[i];
@@ -47,8 +19,18 @@ function getShuffledArray(n, seed = 0) {
   return arr;
 }
 
-// Get a target pangram.
-function getTargetPangram(data, seed = 0) {
+// Given an integer N and a seed, shuffle (pseudorandomly) an array with the numbers 0
+// through N-1.
+function getShuffledNumberArray(n, seed = 0) {
+  return shuffleArray(
+    Array(n)
+      .fill()
+      .map((x, i) => i)
+  );
+}
+
+// Get a target pangram, given data and an optional day offset.
+function getTargetPangram(data, offset = 0) {
   function countUpperCase(word) {
     num_uppercase = 0;
     for (letter of word) {
@@ -65,8 +47,8 @@ function getTargetPangram(data, seed = 0) {
   num_choices = valid_pangrams.reduce((acc, elem) => {
     return acc + countUpperCase(elem);
   }, 0);
-  choice_arr = getShuffledArray(num_choices, seed);
-  choice = choice_arr[getDayNumber() % num_choices];
+  choice_arr = getShuffledNumberArray(num_choices);
+  choice = choice_arr[getDayNumber(offset) % num_choices];
 
   // Loop through all valid word/letter combinations to find the choice we obtained.
   counter = 0;
