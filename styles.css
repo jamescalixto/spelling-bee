@@ -334,7 +334,7 @@ body {
   transition: color 0.3s linear, width 0.1s, height 0.1s;
 }
 
-.keys-button:hover:active {
+.keys-button:active {
   width: 68%;
   height: 80%;
   background-color: var(--color-gray-emphasis);
@@ -510,7 +510,7 @@ body {
 
 .prev-entered-word {
   font-size: 1.1em;
-  margin: 0px 2px;
+  margin: 1px 2px;
   padding: 0px 2px;
 }
 

@@ -81,6 +81,9 @@ def preprocess(df):
     # Eliminate words with too many unique letters.
     df = df[[len(set(word)) <= 7 for word in df["words"]]]
 
+    # Eliminate words with s in them, because they're too easy.
+    df = df[["s" not in word for word in df["words"]]]
+
     return df
 
 
@@ -118,7 +121,7 @@ def filter(dictionary, usable, max_pangrams, min_score, max_score):
 
 
 @timebudget
-def main(dictionary_path, usable_path, max_pangrams, min_score, max_score):
+def main(dictionary_path, usable_path, output_path, max_pangrams, min_score, max_score):
     # Read list of words. Needs keep_default_na because "null" is a word and we need to
     # make sure it doesn't get turned into a null.
     dictionary = pd.read_csv(dictionary_path, keep_default_na=False, header=None)
@@ -130,7 +133,7 @@ def main(dictionary_path, usable_path, max_pangrams, min_score, max_score):
     usable = preprocess(usable)["words"]
 
     df = filter(dictionary, usable, max_pangrams, min_score, max_score)
-    df.to_csv("words.csv", header=False, index=None)
+    df.to_csv(output_path, header=False, index=None)
 
 
 if __name__ == "__main__":
@@ -146,6 +149,9 @@ if __name__ == "__main__":
         "--usable", help="file including all usable pangrams",
     )
     parser.add_argument(
+        "--output", help="output file path",
+    )
+    parser.add_argument(
         "--max_pangrams",
         type=int,
         default=3,
@@ -159,5 +165,10 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     main(
-        args.dictionary, args.usable, args.max_pangrams, args.min_score, args.max_score
+        args.dictionary,
+        args.usable,
+        args.output,
+        args.max_pangrams,
+        args.min_score,
+        args.max_score,
     )

@@ -66,7 +66,7 @@ function getDayNumber(offset = 0) {
 function setCookie() {
   let entered_words = window.game.entered.join("|");
   document.cookie =
-    getDayNumber() +
+    window.game.pangram +
     "-entered=" +
     entered_words +
     "; expires=" +
@@ -81,7 +81,7 @@ function getCookie(offset = 0) {
   }
   for (cookie of raw_cookie) {
     let cookie_day = cookie.trim().split("-")[0];
-    if (cookie_day == getDayNumber(offset)) {
+    if (cookie_day == getTargetPangram(window.game.data, offset)) {
       return cookie.trim().split("=")[1].split("|");
     }
   }
