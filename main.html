@@ -253,7 +253,7 @@
 
       setUpKeyboardInput();
       setUpButtonFunctions();
-      Papa.parse("data/words.csv", {
+      Papa.parse("data/words.csv?1", {
         download: true,
         complete: function (result) {
           let data = result.data.flat(); // unpack result array.
