@@ -143,6 +143,11 @@ function getScore(word) {
   }
 }
 
+// Score words in an array and reutrn the sum.
+function getArrayScore(words) {
+  return words.reduce((acc, cur) => acc + getScore(cur), 0);
+}
+
 // Given data and a string, returns the total score of all words that 1) can be made
 // using the letters in the string, and 2) have all capitalized letters in the string.
 function getTotalScore(data, letters) {

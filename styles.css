@@ -489,7 +489,7 @@ body {
 }
 
 #prev-letters-container {
-  margin: 10px auto 15px auto;
+  margin: 10px auto 0px auto;
   text-align: center;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 1.5em;
@@ -500,6 +500,15 @@ body {
 .prev-entered-letter {
   font-size: 1.1em;
   margin: 0px 3px;
+}
+
+#prev-stats {
+  margin: 0px auto 15px auto;
+  text-align: center;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--color-text-gray);
 }
 
 #prev-words-container {

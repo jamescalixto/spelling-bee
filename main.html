@@ -195,16 +195,18 @@
       <span id="popup-exit" onclick="hideAboutPopup()"></span>
     </div>
 
-    <div id="prev-popup" class="popup hidden">
+    <div id="prev-popup" class="popup">
       <div class="popup-content">
-        <div class="popup-heading">Yesterday's answers
-        </div>
+        <div class="popup-heading">Yesterday's answers</div>
         <div class="popup-content-text">
           <div id="prev-letters-container"></div>
+          <div id="prev-stats">
+            <span id="prev-stats-words-found"></span><span id="prev-stats-words"></span> words | 
+            <span id="prev-stats-points-found"></span><span id="prev-stats-points"></span> points</div>
           <div id="prev-words-container"></div>
         </div>
         <p class="popup-content-text">
-          Highlighted letters indicate the required letter. Highlighted words indicate pangrams. <span id="popup-content-text-entered" class="hidden">Bolded words indicate the words you entered.</span>
+          Highlighted letters indicate the required letter. Highlighted words indicate pangrams. <span id="popup-content-text-entered" class="hidden">Bolded words indicate the words you found.</span>
         </p>
       </div>
       <span id="popup-exit" onclick="hidePrevPopup()"></span>

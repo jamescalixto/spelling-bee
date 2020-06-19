@@ -467,7 +467,8 @@ function hideAboutPopup() {
 // Set up prev popup.S
 function setUpPrevPopup() {
   // Get yesterday's entered words, if they are present.
-  let prev_entered = new Set(getCookie(-1));
+  let prev_entered_array = getCookie(-1);
+  let prev_entered = new Set(prev_entered_array);
   if (prev_entered.size != 0) {
     element("popup-content-text-entered").classList.remove("hidden");
   }
@@ -479,7 +480,6 @@ function setUpPrevPopup() {
   prev_pangram_array.sort((a, b) =>
     a.localeCompare(b, undefined, { sensitivity: "base" })
   );
-
   let prev_letters_container = element("prev-letters-container");
   for (letter of prev_pangram_array) {
     let elem = document.createElement("span");
@@ -491,11 +491,24 @@ function setUpPrevPopup() {
     prev_letters_container.appendChild(elem);
   }
 
-  // Show words.
+  // Set up total words and points.
   let prev_words = getWords(window.game.data, prev_pangram);
   prev_words.sort((a, b) =>
     a.localeCompare(b, undefined, { sensitivity: "base" })
   );
+  element("prev-stats-words").textContent = prev_words.length;
+  let prev_points = getTotalScore(window.game.data, prev_pangram);
+  element("prev-stats-points").textContent = prev_points;
+
+  // Set up found words and points, if present.
+  if (prev_entered_array.length > 0) {
+    element("prev-stats-words-found").textContent =
+      prev_entered_array.length + " of ";
+    element("prev-stats-points-found").textContent =
+      getArrayScore(prev_entered_array) + " of ";
+  }
+
+  // Show words.
   let prev_words_container = element("prev-words-container");
   for (word of prev_words) {
     let elem = document.createElement("span");
