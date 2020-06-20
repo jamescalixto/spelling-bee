@@ -202,8 +202,10 @@ function setUpKeyboardInput() {
       if (isLetter(e.key)) {
         addLetterEntry(e.key);
       } else if (e.key == "Backspace") {
+        event.preventDefault();
         removeLetterEntry();
       } else if (e.key == "Enter") {
+        event.preventDefault();
         enterWord();
       } else if (e.keyCode == 32) {
         event.preventDefault();

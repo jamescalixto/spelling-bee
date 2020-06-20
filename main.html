@@ -13,9 +13,9 @@
   <body>
     <script src="//cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/lib/alea.min.js"></script>
-    <script src="js/words.js?2"></script>
-    <script src="js/interface.js?2"></script>
-    <script src="js/main.js?2"></script>
+    <script src="js/words.js?3"></script>
+    <script src="js/interface.js?3"></script>
+    <script src="js/main.js?3"></script>
 
     <header id="header">
       <div>
@@ -239,7 +239,7 @@
 
       setUpKeyboardInput();
       setUpButtonFunctions();
-      Papa.parse("data/words.csv?2", {
+      Papa.parse("data/words.csv?3", {
         download: true,
         complete: function (result) {
           let data = result.data.flat(); // unpack result array.
