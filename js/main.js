@@ -106,8 +106,8 @@ function getDarkCookie() {
   }
   for (cookie of raw_cookie) {
     let cookie_head = cookie.trim().split("-")[0];
-    if (cookie_head == "!dark" && cookie.trim().split("=")[1] == "dark") {
-      document.body.classList.add("dark");
+    if (cookie_head == "!dark") {
+      switchDarkMode(cookie.trim().split("=")[1]);
     }
   }
 }

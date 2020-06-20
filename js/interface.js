@@ -623,6 +623,19 @@ function toggleDarkMode() {
   }
 }
 
+// Switch dark mode.
+function switchDarkMode(param) {
+  if (param == "light") {
+    document.body.classList.remove("dark");
+    element("toggle-dark").textContent = "dark";
+    setDarkCookie();
+  } else if (param == "dark") {
+    document.body.classList.add("dark");
+    element("toggle-dark").textContent = "light";
+    setDarkCookie();
+  }
+}
+
 // Doot
 function doot() {
   console.log("doot");
