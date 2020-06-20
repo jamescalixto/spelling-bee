@@ -404,12 +404,26 @@ ul {
   background-color: var(--color-gray-emphasis);
 }
 
+#button-shuffle-container {
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+#button-shuffle-img,
 #button-shuffle {
   width: 50px;
   height: 50px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#button-shuffle-img {
   background: url(img/shuffle.svg) center no-repeat;
   background-size: 40%;
   text-align: center;
+  pointer-events: none;
 }
 
 #button-shuffle:hover:active {
@@ -666,7 +680,7 @@ ul {
   filter: invert(var(--invert));
 }
 
-#button-shuffle {
+#button-shuffle-img {
   filter: brightness(var(--bright));
 }
 
