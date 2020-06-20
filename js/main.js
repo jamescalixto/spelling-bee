@@ -80,13 +80,36 @@ function getCookie(offset = 0) {
     return new Array();
   }
   for (cookie of raw_cookie) {
-    let cookie_day = cookie.trim().split("-")[0];
-    if (cookie_day == getTargetPangram(window.game.data, offset)) {
+    let cookie_pangram = cookie.trim().split("-")[0];
+    if (cookie_pangram == getTargetPangram(window.game.data, offset)) {
       return cookie.trim().split("=")[1].split("|");
     }
   }
 
   return new Array();
+}
+
+// Save dark mode cookie.
+function setDarkCookie() {
+  document.cookie =
+    "!dark-entered=" +
+    (document.body.classList.contains("dark") ? "dark" : "light") +
+    "; expires=" +
+    getDateWithOffset(365).toUTCString();
+}
+
+// Load dark mode cookie.
+function getDarkCookie() {
+  let raw_cookie = document.cookie.split(";");
+  if (document.cookie.length == 0) {
+    return;
+  }
+  for (cookie of raw_cookie) {
+    let cookie_head = cookie.trim().split("-")[0];
+    if (cookie_head == "!dark" && cookie.trim().split("=")[1] == "dark") {
+      document.body.classList.add("dark");
+    }
+  }
 }
 
 // Delete all cookies.

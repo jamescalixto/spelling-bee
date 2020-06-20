@@ -13,18 +13,18 @@
   <body>
     <script src="//cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/lib/alea.min.js"></script>
-    <script src="js/words.js?1"></script>
-    <script src="js/interface.js?1"></script>
-    <script src="js/main.js?1"></script>
+    <script src="js/words.js?2"></script>
+    <script src="js/interface.js?2"></script>
+    <script src="js/main.js?2"></script>
 
     <header id="header">
       <div>
         <h1>Spelling Bee</h1>
         <h2>
-          <a href="#" onclick="showHelpPopup();return false;">help</a> |
           <a href="#" onclick="showAboutPopup();return false;">about</a> | 
           <a href="#" onclick="showPrevPopup();return false;">prev</a> | 
-          <a href="#" onclick="showResetPopup();return false;">reset</a> 
+          <a href="#" onclick="showResetPopup();return false;">reset</a> |
+          <a id="toggle-dark" href="#" onclick="toggleDarkMode();return false;">dark</a> 
         </h2>
       </div>
     </header>
@@ -121,9 +121,23 @@
 
     <div id="popup-click-bg" class="hidden"></div>
 
-    <div id="help-popup" class="popup hidden">
+    <div id="progress-popup" class="popup hidden">
       <div class="popup-content">
-        <div class="popup-heading">Instructions</div>
+        <div class="popup-heading">Rankings</div>
+        <div class="popup-content-text">
+          <p>The points required for each rank are fixed percentages of the maximum number of points for each puzzle.</p>
+          <p>Today's puzzle:</p>
+          <p>
+            <ul id="progress-popup-ranking"></ul>
+          </p>
+        </div>
+      </div>
+      <span id="popup-exit" onclick="hideProgressPopup()"></span>
+    </div>
+
+    <div id="about-popup" class="popup hidden">
+      <div class="popup-content">
+        <div class="popup-heading">About</div>
         <div class="popup-content-text">
           <p>Create words using the letters shown.
             <ul>
@@ -146,29 +160,6 @@
           <p>
             New puzzles generate at midnight.
           </p>
-        </div>
-      </div>
-      <span id="popup-exit" onclick="hideHelpPopup()"></span>
-    </div>
-
-    <div id="progress-popup" class="popup hidden">
-      <div class="popup-content">
-        <div class="popup-heading">Rankings</div>
-        <div class="popup-content-text">
-          <p>The points required for each rank are fixed percentages of the maximum number of points for each puzzle.</p>
-          <p>Today's puzzle:</p>
-          <p>
-            <ul id="progress-popup-ranking"></ul>
-          </p>
-        </div>
-      </div>
-      <span id="popup-exit" onclick="hideProgressPopup()"></span>
-    </div>
-
-    <div id="about-popup" class="popup hidden">
-      <div class="popup-content">
-        <div class="popup-heading">About</div>
-        <div class="popup-content-text">
           <p>
             Spelling Bee was made by <a href="https://jamescalixto.com/" target="_blank">James Calixto</a>, inspired by the
             <a href="https://www.nytimes.com/puzzles/spelling-bee" target="_blank"
@@ -178,16 +169,7 @@
           </p>
           <p>
             Word lists are from <a href="http://wordlist.aspell.net/" target="_blank">SCOWL</a>,
-            with minor changes and filtering. See
-            <a
-              href="https://github.com/jamescalixto/spelling-bee"
-              target="_blank"
-              >GitHub</a
-            >
-            for details.
-          </p>
-          <p>
-            SCOWL copyright and licensing information can be found
+            with minor changes and filtering. SCOWL copyright and licensing information can be found
             <a href="http://wordlist.aspell.net/scowl-readme/" target="_blank">here</a>.
           </p>
         </div>
@@ -245,6 +227,8 @@
     </div>
 
     <script>
+      getDarkCookie();
+      
       // Prevent backspace from navigating page.
       window.onkeydown = function(e) {
         if (e.keyCode == 8 && e.target == document.body)
@@ -253,7 +237,7 @@
 
       setUpKeyboardInput();
       setUpButtonFunctions();
-      Papa.parse("data/words.csv?1", {
+      Papa.parse("data/words.csv?2", {
         download: true,
         complete: function (result) {
           let data = result.data.flat(); // unpack result array.

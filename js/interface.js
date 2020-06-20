@@ -401,21 +401,6 @@ function setBlur(make_blurry) {
   }
 }
 
-// Show help popup.
-function showHelpPopup() {
-  element("help-popup").classList.remove("hidden");
-  element("popup-click-bg").classList.remove("hidden");
-  element("popup-click-bg").onclick = hideHelpPopup;
-  setBlur(true);
-}
-
-// Hide help popup.
-function hideHelpPopup() {
-  element("popup-click-bg").classList.add("hidden");
-  element("help-popup").classList.add("hidden");
-  setBlur(false);
-}
-
 // Set up ranking in the progress popup.
 function setUpProgressPopup() {
   let ranking = element("progress-popup-ranking");
@@ -623,6 +608,19 @@ function hideAllPopup() {
   element("popup-click-bg").classList.add("hidden");
   element("all-popup").classList.add("hidden");
   setBlur(false);
+}
+
+// Toggle dark mode.
+function toggleDarkMode() {
+  if (document.body.classList.contains("dark")) {
+    document.body.classList.remove("dark");
+    element("toggle-dark").textContent = "dark";
+    setDarkCookie();
+  } else {
+    document.body.classList.add("dark");
+    element("toggle-dark").textContent = "light";
+    setDarkCookie();
+  }
 }
 
 // Doot

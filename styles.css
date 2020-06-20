@@ -28,6 +28,8 @@ body {
   --button-border: var(--color-transparent);
   --button-border-middle: var(--color-highlight);
   --button-color: black;
+
+  transition: background-color 0.25s;
 }
 
 header {
