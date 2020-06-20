@@ -134,8 +134,8 @@ ul {
 
 #progress-current {
   display: flex;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   position: absolute;
   align-items: center;
   vertical-align: middle;
@@ -143,13 +143,15 @@ ul {
   left: calc(0 * 100% / 9);
   transform: translate(-50%, -50%);
   transition: left 0.25s;
+  border: 2px solid var(--button-border-middle);
+  color: var(--color-keys-button-middle);
+  background-color: var(--color-keys-button-middle-bg);
 }
 
 #progress-current-score {
   width: 100%;
   text-align: center;
   font-size: 0.7em;
-  color: black;
 }
 
 .progress-complete {
@@ -689,7 +691,7 @@ body.dark {
   --bright: 1000;
 
   --color-keys-button-middle: var(--color-highlight);
-  --color-keys-button-middle-bg: var(--color-transparent);
+  --color-keys-button-middle-bg: black;
   --button-background: var(--color-transparent);
   --button-border: var(--color-gray);
   --button-border-middle: var(--color-highlight);
