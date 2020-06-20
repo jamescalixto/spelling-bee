@@ -29,7 +29,7 @@ body {
   --button-border-middle: var(--color-highlight);
   --button-color: black;
 
-  transition: background-color 0.25s;
+  transition: background-color 0.15s ease-out;
 }
 
 header {
