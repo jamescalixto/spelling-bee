@@ -306,7 +306,7 @@ function setUpScreenKeys(letters, reset_middle) {
         if (reset_middle) {
           let km = element("keys-middle");
           km.textContent = letter.toUpperCase();
-          km.style.color = "black";
+          km.style.color = "var(--color-keys-button-middle)";
           km.onclick = function () {
             addLetterEntry(letter);
           };
@@ -314,7 +314,7 @@ function setUpScreenKeys(letters, reset_middle) {
       } else {
         let k = element("keys-" + key_num);
         k.textContent = letter.toUpperCase();
-        k.style.color = "black";
+        k.style.color = "var(--color-black)";
         k.onclick = function () {
           addLetterEntry(letter);
         };
@@ -516,6 +516,7 @@ function setUpPrevPopup() {
     let word_set = new Set(word);
     if (word_set.size == 7) {
       elem.classList.add("highlight-background");
+      elem.style.color = "var(--color-text-gray-highlight)";
     }
     if (prev_entered.has(word.toUpperCase())) {
       elem.classList.add("bolded");

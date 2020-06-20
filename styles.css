@@ -1,14 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap");
 
-:root {
+body {
+  /* Disables pull-to-refresh but allows overscroll glow effects. */
+  overscroll-behavior-y: contain;
+  margin: 0px 8px;
   --color-highlight: #f8cd05;
   --color-highlight-dark: #be9c04;
   --color-invalid: #dcdcdc;
   --color-gray: #e6e6e6;
   --color-gray-emphasis: #d9d9d9;
   --color-dark-gray: #ccc;
-  --color-text-gray: #444;
+  --color-text-gray: #333;
+  --color-text-gray-highlight: #333;
+  --color-black: black;
+  --color-message-bad: black;
   --color-transparent: #00000000;
+  --color-background: white;
+  --link-color: var(--color-text-gray);
+  --color-keys-button-middle: var(--color-black);
+  --color-keys-button-middle-bg: var(--color-highlight);
+  background-color: var(--color-background);
+
+  --invert: 0;
+  --bright: 1;
+
+  --button-background: var(--color-gray);
+  --button-border: var(--color-transparent);
+  --button-border-middle: var(--color-highlight);
+  --button-color: black;
 }
 
 header {
@@ -50,18 +69,17 @@ h2 a:hover:active {
   color: var(--color-highlight);
 }
 
+a,
+a:visited {
+  color: var(--link-color);
+}
+
 p {
   margin: 0px auto 10px auto;
 }
 
 ul {
   padding-inline-start: 20px;
-}
-
-body {
-  /* Disables pull-to-refresh but allows overscroll glow effects. */
-  overscroll-behavior-y: contain;
-  margin: 0px 8px;
 }
 
 .container {
@@ -129,6 +147,7 @@ body {
   width: 100%;
   text-align: center;
   font-size: 0.7em;
+  color: black;
 }
 
 .progress-complete {
@@ -170,7 +189,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: black;
+  color: var(--color-black);
   transition: height 1s;
 }
 
@@ -192,7 +211,7 @@ body {
   margin: 0px 0px 10px 0px;
   flex-basis: 100%;
   font-size: 1.1em;
-  color: black;
+  color: var(--color-black);
 }
 
 #entered-toggle {
@@ -243,7 +262,7 @@ body {
 .message-bad {
   color: white;
   outline: none;
-  background-color: black;
+  background-color: var(--color-message-bad);
   animation: shake 1s;
 }
 
@@ -327,11 +346,18 @@ body {
   outline: none;
   border: none;
   border-radius: 50%;
-  color: black;
-  background-color: var(--color-gray);
+  color: var(--button-color);
+  background-color: var(--button-background);
+  border: 1px solid var(--button-border);
   font-size: 1.2em;
   font-weight: 700;
   transition: color 0.3s linear, width 0.1s, height 0.1s;
+}
+
+.keys-button-middle {
+  background-color: var(--color-transparent);
+  border: 1px solid var(--color-highlight);
+  color: var(--color-highlight);
 }
 
 .keys-button:active {
@@ -341,7 +367,13 @@ body {
 }
 
 .keys-button-middle {
-  background-color: var(--color-highlight);
+  border: 1px solid var(--button-border-middle);
+  color: var(--color-keys-button-middle);
+  background-color: var(--color-keys-button-middle-bg);
+}
+
+.keys-button-middle:active {
+  background-color: var(--color-highlight-dark);
 }
 
 #buttons-container {
@@ -354,10 +386,12 @@ body {
 }
 
 .nav-button {
+  height: 45px;
   border: 1px solid var(--color-dark-gray);
   border-radius: 16px;
   padding: 12px 20px;
   outline: none;
+  color: var(--color-black);
   background-color: var(--color-transparent);
   font-size: 1em;
 }
@@ -367,10 +401,11 @@ body {
 }
 
 #button-shuffle {
-  width: 48px;
-  height: 48px;
+  width: 45px;
+  height: 45px;
   background: url(img/shuffle.svg) center no-repeat;
   background-size: 40%;
+  text-align: center;
 }
 
 #button-shuffle:hover:active {
@@ -395,7 +430,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: var(--color-background);
   border-radius: 8px;
   border: 1px solid var(--color-dark-gray);
   box-shadow: 0 4px 24px var(--color-gray);
@@ -536,6 +571,7 @@ body {
   margin: 0px auto 30px auto;
   padding: 8px 16px;
   outline: none;
+  color: var(--color-black);
   background-color: var(--color-transparent);
   font-size: 1em;
 }
@@ -545,6 +581,7 @@ body {
 }
 
 .reset-button-action {
+  color: black;
   background-color: var(--color-highlight);
 }
 
@@ -617,4 +654,42 @@ body {
   100% {
     transform: translateY(-10px);
   }
+}
+
+#entered-toggle,
+#popup-exit,
+#popup-exit-alt {
+  filter: invert(var(--invert));
+}
+
+#button-shuffle {
+  filter: brightness(var(--bright));
+}
+
+body.dark {
+  --color-highlight: #f8cd05;
+  --color-highlight-dark: #be9c04;
+  --color-invalid: #414141;
+  --color-gray: #c6c6c6;
+  --color-gray-emphasis: #d9d9d9;
+  --color-dark-gray: #ccc;
+  --color-text-gray: #bbb;
+  --color-text-gray-highlight: #444;
+  --color-transparent: #00000000;
+  --color-black: rgb(250,  250,  250);
+  --color-message-bad: #222;
+  --color-background: black;
+  --link-color: #ddd;
+  background-color: var(--color-background);
+  color: #ccc;
+
+  --invert: 1;
+  --bright: 1000;
+
+  --color-keys-button-middle: var(--color-highlight);
+  --color-keys-button-middle-bg: var(--color-transparent);
+  --button-background: var(--color-transparent);
+  --button-border: var(--color-gray);
+  --button-border-middle: var(--color-highlight);
+  --button-color: black;
 }
