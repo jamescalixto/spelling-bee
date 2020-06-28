@@ -208,7 +208,8 @@ ul {
 }
 
 .entered-word {
-  margin: 0px 2px;
+  margin: 0px 1px;
+  padding: 1px 1px;
 }
 
 .entered-word-number {

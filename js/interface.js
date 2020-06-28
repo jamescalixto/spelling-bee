@@ -66,6 +66,10 @@ function addWordToEntered(word) {
   let elem = document.createElement("span");
   elem.classList.add("entered-word");
   elem.textContent = capitalizeInitial(word);
+  if (isPangram(word)) {
+    elem.classList.add("highlight-background");
+    elem.style.color = "var(--color-text-gray-highlight)";
+  }
   entered_words.insertBefore(elem, entered_words.firstChild);
   setCookie();
 }
@@ -79,6 +83,10 @@ function populateEnteredWords(arr) {
     let elem = document.createElement("span");
     elem.classList.add("entered-word");
     elem.textContent = capitalizeInitial(word);
+    if (isPangram(word)) {
+      elem.classList.add("highlight-background");
+      elem.style.color = "var(--color-text-gray-highlight)";
+    }
     entered_words.insertBefore(elem, entered_words.firstChild);
   }
 }
@@ -500,8 +508,7 @@ function setUpPrevPopup() {
   for (word of prev_words) {
     let elem = document.createElement("span");
     elem.classList.add("prev-entered-word");
-    let word_set = new Set(word);
-    if (word_set.size == 7) {
+    if (isPangram(word)) {
       elem.classList.add("highlight-background");
       elem.style.color = "var(--color-text-gray-highlight)";
     }
