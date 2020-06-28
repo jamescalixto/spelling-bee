@@ -459,7 +459,7 @@ function hideAboutPopup() {
   setBlur(false);
 }
 
-// Set up prev popup.S
+// Set up prev popup.
 function setUpPrevPopup() {
   // Get yesterday's entered words, if they are present.
   let prev_entered_array = getCookie(-1);
@@ -506,7 +506,7 @@ function setUpPrevPopup() {
   // Show words.
   let prev_words_container = element("prev-words-container");
   for (word of prev_words) {
-    let elem = document.createElement("span");
+    let elem = document.createElement("a");
     elem.classList.add("prev-entered-word");
     if (isPangram(word)) {
       elem.classList.add("highlight-background");
@@ -515,6 +515,8 @@ function setUpPrevPopup() {
     if (prev_entered.has(word.toUpperCase())) {
       elem.classList.add("bolded");
     }
+    elem.href = "https://www.merriam-webster.com/dictionary/" + word;
+    elem.target = "_blank";
     elem.textContent = capitalizeInitial(word);
     prev_words_container.appendChild(elem);
   }
