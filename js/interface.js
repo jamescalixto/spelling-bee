@@ -386,7 +386,11 @@ function enterWord() {
   }
 
   entered_score = getScore(entered);
-  showMessage("+" + entered_score, isPangram(entered) ? 2 : 1);
+  if (hmm() && entered.toLowerCase() == "calixto") {
+    showMessage("Happy birthday!", 2);
+  } else {
+    showMessage("+" + entered_score, isPangram(entered) ? 2 : 1);
+  }
   window.game.current_score += entered_score;
   addWordToEntered(entered);
   changeProgress(window.game.current_score);

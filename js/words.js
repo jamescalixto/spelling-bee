@@ -31,6 +31,12 @@ function getShuffledNumberArray(n, seed = 0) {
 
 // Get a target pangram, given data and an optional day offset.
 function getTargetPangram(data, offset = 0) {
+  // hmm
+  if (hmm()) {
+    let letter_pick = shuffleArray(['a','c','i','l','o','t','x'], new Date().getFullYear())[0];
+    return capitalizeLetter('acilotx', letter_pick);
+  }
+
   function countUpperCase(word) {
     num_uppercase = 0;
     for (letter of word) {
@@ -83,7 +89,7 @@ function getWords(data, letters) {
     }, "")
   );
 
-  return data.filter((word) => {
+  all_words = data.filter((word) => {
     word = word.toLowerCase();
     word_letters = new Set(word);
     for (letter of word_letters) {
@@ -98,6 +104,12 @@ function getWords(data, letters) {
     }
     return true;
   });
+
+  // hmmmmm
+  if (hmm()) {
+    all_words.push('calixto');
+  }
+  return all_words;
 }
 
 // Given an array of words and some letters, return an array of all pangrams in the
@@ -143,7 +155,7 @@ function getScore(word) {
   }
 }
 
-// Score words in an array and reutrn the sum.
+// Score words in an array and return the sum.
 function getArrayScore(words) {
   return words.reduce((acc, cur) => acc + getScore(cur), 0);
 }
@@ -152,7 +164,7 @@ function getArrayScore(words) {
 // using the letters in the string, and 2) have all capitalized letters in the string.
 function getTotalScore(data, letters) {
   words = getWords(data, letters);
-  return words.reduce((acc, elem) => {
+  return total_score = words.reduce((acc, elem) => {
     word = elem.toLowerCase();
     return acc + getScore(word);
   }, 0);

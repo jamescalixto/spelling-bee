@@ -62,6 +62,13 @@ function getDayNumber(offset = 0) {
   return Math.floor(d.getTime() / DAYS_TO_MILLISECONDS);
 }
 
+// hmm
+function hmm() {
+  let d = new Date();
+  return true;
+  return (d.getDate() == 25 && d.getMonth() == 10);
+}
+
 // Save entered words to cookie.
 function setCookie() {
   let entered_words = window.game.entered.join("|");
