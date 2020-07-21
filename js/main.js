@@ -65,7 +65,6 @@ function getDayNumber(offset = 0) {
 // hmm
 function hmm() {
   let d = new Date();
-  return true;
   return (d.getDate() == 25 && d.getMonth() == 10);
 }
 
