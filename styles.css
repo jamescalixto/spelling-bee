@@ -384,6 +384,26 @@ ul {
   background-color: var(--color-highlight-dark);
 }
 
+@keyframes keys-button-press {
+  50% {
+    transform: scale(0.8);
+    background-color: var(--color-gray-emphasis);
+  }
+}
+
+@keyframes keys-button-middle-press {
+  50% {
+    transform: scale(0.8);
+    background-color: var(--color-highlight-dark);
+  }
+}
+
+@keyframes nav-button-press {
+  50% {
+    background-color: var(--color-gray-emphasis)
+  }
+}
+
 #buttons-container {
   max-width: 300px;
   width: 95%;

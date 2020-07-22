@@ -208,19 +208,55 @@ function setUpKeyboardInput() {
       !element("entered-toggle").classList.contains("entered-toggle-expanded")
     ) {
       if (isLetter(e.key)) {
+        simulateKeyPress(e.key);
         addLetterEntry(e.key);
       } else if (e.key == "Backspace") {
         event.preventDefault();
+        simulateNavPress("button-delete");
         removeLetterEntry();
       } else if (e.key == "Enter") {
         event.preventDefault();
+        simulateNavPress("button-enter");
         enterWord();
       } else if (e.keyCode == 32) {
         event.preventDefault();
+        simulateNavPress("button-shuffle");
         shuffleScreenKeys();
       }
     }
   });
+}
+
+// Make a letter key blink.
+function simulateKeyPress(letter) {
+  for (k of Array(6)
+    .fill()
+    .map((x, i) => i + 1)) {
+    let key_name = "keys-" + k;
+    if (element(key_name).textContent.toLowerCase() == letter.toLowerCase()) {
+      element(key_name).style.animation = "keys-button-press 0.1s 1";
+      setTimeout(function () {
+        element(key_name).style.animation = "";
+      }, 100);
+      return;
+    }
+  }
+
+  if (element("keys-middle").textContent.toLowerCase() == letter.toLowerCase()) {
+    element("keys-middle").style.animation = "keys-button-middle-press 0.1s 1";
+    setTimeout(function () {
+      element("keys-middle").style.animation = "";
+    }, 100);
+  }
+}
+
+// Make a nav button blink.
+function simulateNavPress(button_name) {
+  let pressed = element(button_name);
+  pressed.style.animation = "nav-button-press 0.1s 1";
+  setTimeout(function () {
+    pressed.style.animation = "";
+  }, 100);
 }
 
 // Add letter to entry.
