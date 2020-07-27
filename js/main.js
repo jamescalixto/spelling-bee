@@ -30,10 +30,19 @@ function newGame(data) {
   addWordsToEntered();
   setUpDropdown();
   setUpScreenKeys(window.game.pangram, true);
+  setUpAboutPopup();
   setUpPrevPopup();
   setUpProgressPopup();
+  setUpReturnPopup();
   setUpVictoryPopup();
   setUpAllPopup();
+
+  if (returnPopupNotShownYet) {
+    if (window.game.current_score != 0 && getRankNumber != 0) {
+      showReturnPopup();
+    }
+    returnPopupNotShownYet = false;
+  }
 }
 
 // Test if a key is a letter.
@@ -60,12 +69,6 @@ function getDayNumber(offset = 0) {
   let d = getDateWithOffset(offset);
   let DAYS_TO_MILLISECONDS = 24 * 60 * 60 * 1000;
   return Math.floor(d.getTime() / DAYS_TO_MILLISECONDS);
-}
-
-// hmm
-function hmm() {
-  let d = new Date();
-  return (d.getDate() == 25 && d.getMonth() == 10);
 }
 
 // Save entered words to cookie.

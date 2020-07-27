@@ -1,6 +1,6 @@
 // Define variables for ranking.
-const LEVEL_PERCENTS = [0.7, 0.55, 0.4, 0.25, 0.2, 0.15, 0.1, 0.05, 0];
-const LEVEL_NAMES = [
+let LEVEL_PERCENTS = [0.7, 0.55, 0.4, 0.25, 0.2, 0.15, 0.1, 0.05, 0];
+let LEVEL_NAMES = [
   "Genius",
   "Exceptional",
   "Fabulous",
@@ -11,6 +11,31 @@ const LEVEL_NAMES = [
   "Novice",
   "Beginner",
 ];
+
+if (hmm()) {
+  LEVEL_NAMES = [
+    "!!!",
+    "You Rock",
+    "Amazing",
+    "Delightful",
+    "How Nice",
+    "Talented",
+    "Rising Up",
+    "Intrepid",
+    "Beginner",
+  ];
+}
+
+// Get progress rank number, where 8 is lowest (Beginner) and 0 is highest (Genius).
+function getRankNumber(progress) {
+  for (i of Array(LEVEL_PERCENTS.length)
+  .fill()
+  .map((x, i) => i)) {
+    if (progress >= Math.floor(window.game.total_score * LEVEL_PERCENTS[i])) {
+      return i;
+    }
+  }
+}
 
 // Change progress bar progress.
 function changeProgress(progress) {
@@ -460,11 +485,22 @@ function setUpProgressPopup() {
     .fill()
     .map((x, i) => i)) {
     let elem = document.createElement("li");
-    elem.textContent =
+    if (hmm()) {
+      elem.textContent =
+      LEVEL_NAMES[i].substring(1) +
+      " (" +
+      Math.floor(LEVEL_PERCENTS[i] * max_score) +
+      " points)";
+      let boldy = document.createElement("b");
+      boldy.textContent = LEVEL_NAMES[i].substring(0,1);
+      elem.insertBefore(boldy, elem.firstChild);
+    } else {
+      elem.textContent =
       LEVEL_NAMES[i] +
       " (" +
       Math.floor(LEVEL_PERCENTS[i] * max_score) +
       " points)";
+    }
     ranking.insertBefore(elem, ranking.firstChild);
   }
 }
@@ -482,6 +518,18 @@ function hideProgressPopup() {
   element("popup-click-bg").classList.add("hidden");
   element("progress-popup").classList.add("hidden");
   setBlur(false);
+}
+
+// Set up about popup.
+function setUpAboutPopup() {
+  if (hmm()) {
+    element("popup-content-text-hmm").textContent = " with a special exception on my birthday";
+    element("name-hmm").classList.add("bold");
+    element("explanation-hmm").textContent = " Yes, even today.";
+  } else {
+    element("popup-content-text-hmm").textContent = "";
+    element("explanation-hmm").textContent = "";
+  }
 }
 
 // Show about popup.
@@ -516,6 +564,7 @@ function setUpPrevPopup() {
     a.localeCompare(b, undefined, { sensitivity: "base" })
   );
   let prev_letters_container = element("prev-letters-container");
+  prev_letters_container.textContent = ""; // clears content.
   for (letter of prev_pangram_array) {
     let elem = document.createElement("span");
     elem.classList.add("prev-entered-letter");
@@ -545,6 +594,7 @@ function setUpPrevPopup() {
 
   // Show words.
   let prev_words_container = element("prev-words-container");
+  prev_words_container.textContent = ""; // clears content.
   for (word of prev_words) {
     let elem = document.createElement("a");
     elem.classList.add("prev-entered-word");
@@ -615,6 +665,29 @@ function setUpCountdown(elem) {
   }, 1000);
 }
 
+// Set up return popup.
+function setUpReturnPopup() {
+  setUpCountdown("return-countdown-span");
+}
+
+// Show return popup.
+function showReturnPopup() {
+  element("return-popup").classList.remove("hidden");
+  element("popup-click-bg").classList.remove("hidden");
+  element("popup-click-bg").onclick = hideReturnPopup;
+  element("return-rank").textContent = LEVEL_NAMES[getRankNumber(window.game.current_score)];
+  element("return-words").textContent = window.game.entered.length + (window.game.entered.length == 1 ? " word" : " words");
+  element("return-points").textContent = window.game.current_score + (window.game.current_score == 1 ? " point" : " points");
+  setBlur(true);
+}
+
+// Hide return popup.
+function hideReturnPopup() {
+  element("popup-click-bg").classList.add("hidden");
+  element("return-popup").classList.add("hidden");
+  setBlur(false);
+}
+
 // Set up victory popup.
 function setUpVictoryPopup() {
   setUpCountdown("victory-countdown-span");
@@ -631,7 +704,7 @@ function showVictoryPopup() {
   window.game.show_victory_popup = false;
 }
 
-// Hide about popup.
+// Hide victory popup.
 function hideVictoryPopup() {
   element("popup-click-bg").classList.add("hidden");
   element("victory-popup").classList.add("hidden");

@@ -13,9 +13,9 @@
   <body>
     <script src="libs/papaparse.js"></script>
     <script src="libs/alea.min.js"></script>
-    <script src="js/words.js?3"></script>
-    <script src="js/interface.js?3"></script>
-    <script src="js/main.js?3"></script>
+    <script src="js/words.js?4"></script>
+    <script src="js/interface.js?4"></script>
+    <script src="js/main.js?4"></script>
 
     <header id="header">
       <div>
@@ -148,7 +148,7 @@
               <li>Letters can be used more than once.</li>
               <li>
                 Words with hyphens, proper nouns, vulgarities, and especially
-                obscure words are not in the word list.
+                obscure words are not in the word list<b id="popup-content-text-hmm"></b>.
               </li>
             </ul>
           </p>
@@ -156,14 +156,14 @@
             <ul>
               <li>Four-letter words are worth 1 point.</li>
               <li>Five-letter words and longer are worth 1 point for each letter.</li>
-              <li>Pangrams — words that use all seven letters — earn an additional bonus of 7 points. There is at least one pangram per puzzle.</li>
+              <li>Pangrams — words that use all seven letters — earn an additional bonus of 7 points. There is at least one pangram per puzzle.<b id="explanation-hmm"></b></li>
             </ul>
           </p>
           <p>
             New puzzles generate at midnight.
           </p>
           <p>
-            Spelling Bee was made by <a href="https://jamescalixto.com/" target="_blank">James Calixto</a>, inspired by the
+            Spelling Bee was made by <a href="https://jamescalixto.com/" target="_blank">James <span id="name-hmm">Calixto</span></a>, inspired by the
             <a href="https://www.nytimes.com/puzzles/spelling-bee" target="_blank"
               >New York Times puzzle</a
             >. Check out the source on <a href="https://github.com/jamescalixto/spelling-bee" target="_blank"
@@ -212,6 +212,16 @@
       </div>
       <span id="popup-exit-alt" onclick="hideResetPopup()"></span>
     </div>
+
+    <div id="return-popup" class="popup hidden">
+      <div id="popup-content-alt">
+        <h1 class="return-popup-header">Welcome back!</h1>
+        <p id="return-text">You've achieved the rank of <b id="return-rank"></b> by finding <b id="return-words"></b> for <b id="return-points"></b>.</p>
+        <p id="return-countdown">How far can you get in the next <b id="return-countdown-span">day</b>?</p>
+      </div>
+      <span id="popup-exit-alt" onclick="hideReturnPopup()"></span>
+    </div>
+
     <div id="victory-popup" class="popup hidden">
       <div id="popup-content-alt">
         <img id="victory-img" src="img/victory.svg">
@@ -221,6 +231,7 @@
       </div>
       <span id="popup-exit-alt" onclick="hideVictoryPopup()"></span>
     </div>
+
     <div id="all-popup" class="popup hidden">
       <div id="popup-content-alt">
         <img id="all-img" src="img/fireworks.svg">
@@ -233,6 +244,8 @@
 
     <script>
       getDarkCookie();
+
+      var returnPopupNotShownYet = true;
 
       // Prevent backspace from navigating page.
       window.onkeydown = function(e) {

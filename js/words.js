@@ -7,6 +7,9 @@ function print(val) {
   console.log(val);
 }
 
+// hmm
+function hmm() { return (new Date().getDate() == 25 && newDate().getMonth() == 9); }
+
 // Shuffle an array and return it.
 function shuffleArray(arr, seed = 0) {
   let rng = new alea(seed);
@@ -32,8 +35,8 @@ function getShuffledNumberArray(n, seed = 0) {
 // Get a target pangram, given data and an optional day offset.
 function getTargetPangram(data, offset = 0) {
   // hmm
-  if (hmm()) {
-    let letter_pick = shuffleArray(['a','c','i','l','o','t','x'], new Date().getFullYear())[0];
+  if (hmm() && offset == 0) {
+    let letter_pick = shuffleArray(['a','c','i','l','o','t','x'])[new Date().getFullYear() % 7];
     return capitalizeLetter('acilotx', letter_pick);
   }
 
@@ -106,7 +109,11 @@ function getWords(data, letters) {
   });
 
   // hmmmmm
-  if (hmm()) {
+  let hmm_array = Array.from(new Set(letters.toLowerCase()));
+  hmm_array.sort((a, b) =>
+    a.localeCompare(b, undefined, { sensitivity: "base" })
+  );
+  if (hmm() && hmm_array.join('') == 'acilotx') {
     all_words.push('calixto');
   }
   return all_words;
