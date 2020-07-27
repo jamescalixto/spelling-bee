@@ -38,7 +38,7 @@ function newGame(data) {
   setUpAllPopup();
 
   if (returnPopupNotShownYet) {
-    if (window.game.current_score != 0 && getRankNumber != 0) {
+    if (window.game.current_score != 0 && getRankNumber(window.game.current_score) != 0) {
       showReturnPopup();
     }
     returnPopupNotShownYet = false;

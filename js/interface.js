@@ -523,7 +523,7 @@ function hideProgressPopup() {
 // Set up about popup.
 function setUpAboutPopup() {
   if (hmm()) {
-    element("popup-content-text-hmm").textContent = " with a special exception on my birthday";
+    element("popup-content-text-hmm").textContent = " with a special exception once a year";
     element("name-hmm").classList.add("bold");
     element("explanation-hmm").textContent = " Yes, even today.";
   } else {
