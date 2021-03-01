@@ -37,9 +37,24 @@ function getRankNumber(progress) {
   }
 }
 
+// Get progress next text.
+function getProgressNextText(progress) {
+  let maximum = window.game.total_score;
+  let rank = getRankNumber(progress);
+  let next_text = "";
+  if (rank != 0) {
+    let next_score = Math.floor(maximum * LEVEL_PERCENTS[rank - 1]);
+    let diff = next_score - progress;
+    next_text = diff + " to " + LEVEL_NAMES[rank - 1];
+  }
+
+  element("progress-next").textContent = next_text;
+}
+
 // Change progress bar progress.
 function changeProgress(progress) {
   let maximum = window.game.total_score;
+  getProgressNextText(progress);
   for (i of Array(LEVEL_PERCENTS.length)
     .fill()
     .map((x, i) => i)) {

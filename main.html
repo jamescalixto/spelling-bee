@@ -1,267 +1,273 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
 
-    <title>Spelling Bee</title>
-    <link rel="stylesheet" href="styles.css?5" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
 
-  <body>
-    <script src="libs/papaparse.js"></script>
-    <script src="libs/alea.min.js"></script>
-    <script src="js/words.js?5"></script>
-    <script src="js/interface.js?5"></script>
-    <script src="js/main.js?5"></script>
+  <title>Spelling Bee</title>
+  <link rel="stylesheet" href="styles.css?5" />
+</head>
 
-    <header id="header">
-      <div>
-        <h1>Spelling Bee</h1>
-        <h2>
-          <a href="#" onclick="showAboutPopup();return false;">about</a> | 
-          <a href="#" onclick="showPrevPopup();return false;">prev</a> | 
-          <a href="#" onclick="showResetPopup();return false;">reset</a> |
-          <a id="toggle-dark" href="#" onclick="toggleDarkMode();return false;">dark</a> 
-        </h2>
-      </div>
-    </header>
+<body>
+  <script src="libs/papaparse.js"></script>
+  <script src="libs/alea.min.js"></script>
+  <script src="js/words.js?5"></script>
+  <script src="js/interface.js?5"></script>
+  <script src="js/main.js?5"></script>
 
-    <div id="container" class="container">
-      <div id="date-container"></div>
-      <div id="progress-container" onclick="showProgressPopup()">
+  <header id="header">
+    <div>
+      <h1>Spelling Bee</h1>
+      <h2>
+        <a href="#" onclick="showAboutPopup();return false;">about</a> |
+        <a href="#" onclick="showPrevPopup();return false;">prev</a> |
+        <a href="#" onclick="showResetPopup();return false;">reset</a> |
+        <a id="toggle-dark" href="#" onclick="toggleDarkMode();return false;">dark</a>
+      </h2>
+    </div>
+  </header>
+
+  <div id="container" class="container">
+    <div id="date-container"></div>
+    <div id="progress-container" onclick="showProgressPopup()">
+      <div id="progress-info">
         <div id="progress-name">Beginner</div>
-        <div id="progress-bar">
-          <div id="progress-dots">
-            <div class="progress-dot">
-              <span class="progress-incomplete"></span>
-            </div>
-            <div class="progress-dot">
-              <span class="progress-incomplete"></span>
-            </div>
-            <div class="progress-dot">
-              <span class="progress-incomplete"></span>
-            </div>
-            <div class="progress-dot">
-              <span class="progress-incomplete"></span>
-            </div>
-            <div class="progress-dot">
-              <span class="progress-incomplete"></span>
-            </div>
-            <div class="progress-dot">
-              <span class="progress-incomplete"></span>
-            </div>
-            <div class="progress-dot">
-              <span class="progress-incomplete"></span>
-            </div>
-            <div class="progress-dot">
-              <span class="progress-incomplete"></span>
-            </div>
-            <div class="progress-dot">
-              <span class="progress-incomplete progress-square"></span>
-            </div>
-          </div>
-          <div id="progress-current" class="progress-complete">
-            <div id="progress-current-score">0</div>
-          </div>
-        </div>
+        <div id="progress-next"></div>
       </div>
-      <div id="entered-container" class="entered-container">
-        <div id="entered-words" class="entered-words"></div>
-        <span id="entered-toggle"></span>
-      </div>
-      <div id="below-entered-container" class="below-entered-container">
-        <div id="message-container"><div id="message">.</div></div>
-        <div id="entry-container">
-          <div id="entry-container-holder"></div>
-        </div>
-        <div id="keys-container">
-          <div class="keys-spacer"></div>
-          <div class="keys-letter">
-            <button id="keys-1" type="button" class="keys-button"></button>
+      <div id="progress-bar">
+        <div id="progress-dots">
+          <div class="progress-dot">
+            <span class="progress-incomplete"></span>
           </div>
-          <div class="keys-letter">
-            <button id="keys-2" type="button" class="keys-button"></button>
+          <div class="progress-dot">
+            <span class="progress-incomplete"></span>
           </div>
-          <div class="keys-letter">
-            <button id="keys-3" type="button" class="keys-button"></button>
+          <div class="progress-dot">
+            <span class="progress-incomplete"></span>
           </div>
-          <div class="keys-letter">
-            <button
-              id="keys-middle"
-              type="button"
-              class="keys-button keys-button-middle"
-            ></button>
+          <div class="progress-dot">
+            <span class="progress-incomplete"></span>
           </div>
-          <div class="keys-letter">
-            <button id="keys-4" type="button" class="keys-button"></button>
+          <div class="progress-dot">
+            <span class="progress-incomplete"></span>
           </div>
-          <div class="keys-spacer"></div>
-          <div class="keys-letter">
-            <button id="keys-5" type="button" class="keys-button"></button>
+          <div class="progress-dot">
+            <span class="progress-incomplete"></span>
           </div>
-          <div class="keys-letter">
-            <button id="keys-6" type="button" class="keys-button"></button>
+          <div class="progress-dot">
+            <span class="progress-incomplete"></span>
+          </div>
+          <div class="progress-dot">
+            <span class="progress-incomplete"></span>
+          </div>
+          <div class="progress-dot">
+            <span class="progress-incomplete progress-square"></span>
           </div>
         </div>
-        <div id="buttons-container">
-          <button id="button-delete" type="button" class="nav-button">
-            Delete
-          </button>
-          <div id="button-shuffle-container">
-            <button id="button-shuffle" type="button" class="nav-button"></button>
-            <div id="button-shuffle-img"></div>
-          </div>
-          <button id="button-enter" type="button" class="nav-button">
-            Enter
-          </button>
+        <div id="progress-current" class="progress-complete">
+          <div id="progress-current-score">0</div>
         </div>
       </div>
     </div>
-
-    <div id="popup-click-bg" class="hidden"></div>
-
-    <div id="progress-popup" class="popup hidden">
-      <div class="popup-content">
-        <div class="popup-heading">Rankings</div>
-        <div class="popup-content-text">
-          <p>The points required for each rank are fixed percentages of the maximum number of points for each puzzle.</p>
-          <p>Today's puzzle:</p>
-          <p>
-            <ul id="progress-popup-ranking"></ul>
-          </p>
+    <div id="entered-container" class="entered-container">
+      <div id="entered-words" class="entered-words"></div>
+      <span id="entered-toggle"></span>
+    </div>
+    <div id="below-entered-container" class="below-entered-container">
+      <div id="message-container">
+        <div id="message">.</div>
+      </div>
+      <div id="entry-container">
+        <div id="entry-container-holder"></div>
+      </div>
+      <div id="keys-container">
+        <div class="keys-spacer"></div>
+        <div class="keys-letter">
+          <button id="keys-1" type="button" class="keys-button"></button>
+        </div>
+        <div class="keys-letter">
+          <button id="keys-2" type="button" class="keys-button"></button>
+        </div>
+        <div class="keys-letter">
+          <button id="keys-3" type="button" class="keys-button"></button>
+        </div>
+        <div class="keys-letter">
+          <button id="keys-middle" type="button" class="keys-button keys-button-middle"></button>
+        </div>
+        <div class="keys-letter">
+          <button id="keys-4" type="button" class="keys-button"></button>
+        </div>
+        <div class="keys-spacer"></div>
+        <div class="keys-letter">
+          <button id="keys-5" type="button" class="keys-button"></button>
+        </div>
+        <div class="keys-letter">
+          <button id="keys-6" type="button" class="keys-button"></button>
         </div>
       </div>
-      <span id="popup-exit" onclick="hideProgressPopup()"></span>
-    </div>
-
-    <div id="about-popup" class="popup hidden">
-      <div class="popup-content">
-        <div class="popup-heading">About</div>
-        <div class="popup-content-text">
-          <p>Create words using the letters shown.
-            <ul>
-              <li>Words must have at least four letters.</li>
-              <li>Words must include the center letter.</li>
-              <li>Letters can be used more than once.</li>
-              <li>
-                Words with hyphens, proper nouns, vulgarities, and especially
-                obscure words are not in the word list<b id="popup-content-text-hmm"></b>.
-              </li>
-            </ul>
-          </p>
-          <p>Every word earns points.
-            <ul>
-              <li>Four-letter words are worth 1 point.</li>
-              <li>Five-letter words and longer are worth 1 point for each letter.</li>
-              <li>Pangrams — words that use all seven letters — earn an additional bonus of 7 points. There is at least one pangram per puzzle.<b id="explanation-hmm"></b></li>
-            </ul>
-          </p>
-          <p>
-            New puzzles generate at midnight.
-          </p>
-          <p>
-            <span id="name-hmm">Spelling Bee was made by <a href="https://jamescalixto.com/" target="_blank">James Calixto</a></span>, inspired by the
-            <a href="https://www.nytimes.com/puzzles/spelling-bee" target="_blank"
-              >New York Times puzzle</a
-            >. Check out the source on <a href="https://github.com/jamescalixto/spelling-bee" target="_blank"
-            >GitHub</a>.
-          </p>
-          <p>
-            Word lists are from <a href="http://wordlist.aspell.net/" target="_blank">SCOWL</a>,
-            with minor changes and filtering. SCOWL copyright and licensing information can be found
-            <a href="http://wordlist.aspell.net/scowl-readme/" target="_blank">here</a>.
-          </p>
-        </div>
-      </div>
-      <span id="popup-exit" onclick="hideAboutPopup()"></span>
-    </div>
-
-    <div id="prev-popup" class="popup hidden">
-      <div class="popup-content">
-        <div class="popup-heading">Yesterday's answers</div>
-        <div class="popup-content-text">
-          <div id="prev-letters-container"></div>
-          <div id="prev-stats">
-            <span id="prev-stats-words-found"></span><span id="prev-stats-words"></span> words | 
-            <span id="prev-stats-points-found"></span><span id="prev-stats-points"></span> points</div>
-          <div id="prev-words-container"></div>
-        </div>
-        <p class="popup-content-text">
-          Highlighted letters indicate the required letter. Highlighted words indicate pangrams. <span id="popup-content-text-entered" class="hidden">Bolded words indicate the words you found.</span>
-        </p>
-        <p class="popup-content-text">
-          Click on the words to see their definitions in Merriam-Webster.
-        </p>
-      </div>
-      <span id="popup-exit" onclick="hidePrevPopup()"></span>
-    </div>
-
-    <div id="reset-popup" class="popup hidden">
-      <div id="popup-content-alt">
-        <h1>Reset</h1>
-        <p id="reset-text">Are you sure you want to clear your progress?</p>
-        <button id="button-no-reset" type="button" class="reset-button" onclick="hideResetPopup()">
-          No thanks
+      <div id="buttons-container">
+        <button id="button-delete" type="button" class="nav-button">
+          Delete
         </button>
-        <button id="button-reset" type="button" class="reset-button reset-button-action" onclick="resetGame()">
-          Reset
+        <div id="button-shuffle-container">
+          <button id="button-shuffle" type="button" class="nav-button"></button>
+          <div id="button-shuffle-img"></div>
+        </div>
+        <button id="button-enter" type="button" class="nav-button">
+          Enter
         </button>
       </div>
-      <span id="popup-exit-alt" onclick="hideResetPopup()"></span>
     </div>
+  </div>
 
-    <div id="return-popup" class="popup hidden">
-      <div id="popup-content-alt">
-        <h1 class="return-popup-header">Welcome back!</h1>
-        <p id="return-text">You've achieved the rank of <b id="return-rank"></b> by finding <b id="return-words"></b> for <b id="return-points"></b>.</p>
-        <p id="return-countdown">How far can you get in the next <b id="return-countdown-span">day</b>?</p>
+  <div id="popup-click-bg" class="hidden"></div>
+
+  <div id="progress-popup" class="popup hidden">
+    <div class="popup-content">
+      <div class="popup-heading">Rankings</div>
+      <div class="popup-content-text">
+        <p>The points required for each rank are fixed percentages of the maximum number of points for each puzzle.</p>
+        <p>Today's puzzle:</p>
+        <p>
+          <ul id="progress-popup-ranking"></ul>
+        </p>
       </div>
-      <span id="popup-exit-alt" onclick="hideReturnPopup()"></span>
     </div>
+    <span id="popup-exit" onclick="hideProgressPopup()"></span>
+  </div>
 
-    <div id="victory-popup" class="popup hidden">
-      <div id="popup-content-alt">
-        <img id="victory-img" src="img/victory.svg">
-        <h1>Excellent work!</h1>
-        <p id="victory-text">You've reached the highest rank, with <b id="victory-words"></b> and <b id="victory-points"></b>.</p>
-        <p id="victory-countdown">Check back in <b id="victory-countdown-span">a bit</b> for a new puzzle.</p>
+  <div id="about-popup" class="popup hidden">
+    <div class="popup-content">
+      <div class="popup-heading">About</div>
+      <div class="popup-content-text">
+        <p>Create words using the letters shown.
+          <ul>
+            <li>Words must have at least four letters.</li>
+            <li>Words must include the center letter.</li>
+            <li>Letters can be used more than once.</li>
+            <li>
+              Words with hyphens, proper nouns, vulgarities, and especially
+              obscure words are not in the word list<b id="popup-content-text-hmm"></b>.
+            </li>
+          </ul>
+        </p>
+        <p>Every word earns points.
+          <ul>
+            <li>Four-letter words are worth 1 point.</li>
+            <li>Five-letter words and longer are worth 1 point for each letter.</li>
+            <li>Pangrams — words that use all seven letters — earn an additional bonus of 7 points. There is at least
+              one pangram per puzzle.<b id="explanation-hmm"></b></li>
+          </ul>
+        </p>
+        <p>
+          New puzzles generate at midnight.
+        </p>
+        <p>
+          <span id="name-hmm">Spelling Bee was made by <a href="https://jamescalixto.com/" target="_blank">James
+              Calixto</a></span>, inspired by the
+          <a href="https://www.nytimes.com/puzzles/spelling-bee" target="_blank">New York Times puzzle</a>. Check out
+          the source on <a href="https://github.com/jamescalixto/spelling-bee" target="_blank">GitHub</a>.
+        </p>
+        <p>
+          Word lists are from <a href="http://wordlist.aspell.net/" target="_blank">SCOWL</a>,
+          with minor changes and filtering. SCOWL copyright and licensing information can be found
+          <a href="http://wordlist.aspell.net/scowl-readme/" target="_blank">here</a>.
+        </p>
       </div>
-      <span id="popup-exit-alt" onclick="hideVictoryPopup()"></span>
     </div>
+    <span id="popup-exit" onclick="hideAboutPopup()"></span>
+  </div>
 
-    <div id="all-popup" class="popup hidden">
-      <div id="popup-content-alt">
-        <img id="all-img" src="img/fireworks.svg">
-        <h1>Spectacular!</h1>
-        <p id="all-text">You've found all <b id="all-words"></b>, worth <b id="all-points"></b>. Truly incredible.</p>
-        <p id="all-countdown">Check back in <b id="all-countdown-span">a bit</b> for a new puzzle.</p>
+  <div id="prev-popup" class="popup hidden">
+    <div class="popup-content">
+      <div class="popup-heading">Yesterday's answers</div>
+      <div class="popup-content-text">
+        <div id="prev-letters-container"></div>
+        <div id="prev-stats">
+          <span id="prev-stats-words-found"></span><span id="prev-stats-words"></span> words |
+          <span id="prev-stats-points-found"></span><span id="prev-stats-points"></span> points</div>
+        <div id="prev-words-container"></div>
       </div>
-      <span id="popup-exit-alt" onclick="hideAllPopup()"></span>
+      <p class="popup-content-text">
+        Highlighted letters indicate the required letter. Highlighted words indicate pangrams. <span
+          id="popup-content-text-entered" class="hidden">Bolded words indicate the words you found.</span>
+      </p>
+      <p class="popup-content-text">
+        Click on the words to see their definitions in Merriam-Webster.
+      </p>
     </div>
+    <span id="popup-exit" onclick="hidePrevPopup()"></span>
+  </div>
 
-    <script>
-      getDarkCookie();
+  <div id="reset-popup" class="popup hidden">
+    <div id="popup-content-alt">
+      <h1>Reset</h1>
+      <p id="reset-text">Are you sure you want to clear your progress?</p>
+      <button id="button-no-reset" type="button" class="reset-button" onclick="hideResetPopup()">
+        No thanks
+      </button>
+      <button id="button-reset" type="button" class="reset-button reset-button-action" onclick="resetGame()">
+        Reset
+      </button>
+    </div>
+    <span id="popup-exit-alt" onclick="hideResetPopup()"></span>
+  </div>
 
-      var returnPopupNotShownYet = true;
+  <div id="return-popup" class="popup hidden">
+    <div id="popup-content-alt">
+      <h1 class="return-popup-header">Welcome back!</h1>
+      <p id="return-text">You've achieved the rank of <b id="return-rank"></b> by finding <b id="return-words"></b> for
+        <b id="return-points"></b>.</p>
+      <p id="return-countdown">How far can you get in the next <b id="return-countdown-span">day</b>?</p>
+    </div>
+    <span id="popup-exit-alt" onclick="hideReturnPopup()"></span>
+  </div>
 
-      // Prevent backspace from navigating page.
-      window.onkeydown = function(e) {
-        if (e.keyCode == 8 && e.target == document.body)
-          e.preventDefault();
-      }
+  <div id="victory-popup" class="popup hidden">
+    <div id="popup-content-alt">
+      <img id="victory-img" src="img/victory.svg">
+      <h1>Excellent work!</h1>
+      <p id="victory-text">You've reached the highest rank, with <b id="victory-words"></b> and <b
+          id="victory-points"></b>.</p>
+      <p id="victory-countdown">Check back in <b id="victory-countdown-span">a bit</b> for a new puzzle.</p>
+    </div>
+    <span id="popup-exit-alt" onclick="hideVictoryPopup()"></span>
+  </div>
 
-      setUpKeyboardInput();
-      setUpButtonFunctions();
-      Papa.parse("data/words.csv?3", {
-        download: true,
-        complete: function (result) {
-          let data = result.data.flat(); // unpack result array.
-          newGame(data);
-        },
-      });
-    </script>
-  </body>
+  <div id="all-popup" class="popup hidden">
+    <div id="popup-content-alt">
+      <img id="all-img" src="img/fireworks.svg">
+      <h1>Spectacular!</h1>
+      <p id="all-text">You've found all <b id="all-words"></b>, worth <b id="all-points"></b>. Truly incredible.</p>
+      <p id="all-countdown">Check back in <b id="all-countdown-span">a bit</b> for a new puzzle.</p>
+    </div>
+    <span id="popup-exit-alt" onclick="hideAllPopup()"></span>
+  </div>
+
+  <script>
+    getDarkCookie();
+
+    var returnPopupNotShownYet = true;
+
+    // Prevent backspace from navigating page.
+    window.onkeydown = function (e) {
+      if (e.keyCode == 8 && e.target == document.body)
+        e.preventDefault();
+    }
+
+    setUpKeyboardInput();
+    setUpButtonFunctions();
+    Papa.parse("data/words.csv?3", {
+      download: true,
+      complete: function (result) {
+        let data = result.data.flat(); // unpack result array.
+        newGame(data);
+      },
+    });
+  </script>
+</body>
+
 </html>
