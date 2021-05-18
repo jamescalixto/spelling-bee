@@ -8,7 +8,7 @@ function print(val) {
 }
 
 // hmm
-function hmm() { return (new Date().getDate() == 25 && newDate().getMonth() == 9); }
+function hmm() { return (new Date().getDate() == 25 && new Date().getMonth() == 9); }
 
 // Shuffle an array and return it.
 function shuffleArray(arr, seed = 0) {
@@ -36,7 +36,7 @@ function getShuffledNumberArray(n, seed = 0) {
 function getTargetPangram(data, offset = 0) {
   // hmm
   if (hmm() && offset == 0) {
-    let letter_pick = shuffleArray(['a','c','i','l','o','t','x'])[new Date().getFullYear() % 7];
+    let letter_pick = shuffleArray(['a', 'c', 'i', 'l', 'o', 't', 'x'])[new Date().getFullYear() % 7];
     return capitalizeLetter('acilotx', letter_pick);
   }
 

@@ -117,6 +117,7 @@ function getDarkCookie() {
     let cookie_head = cookie.trim().split("-")[0];
     if (cookie_head == "!dark") {
       switchDarkMode(cookie.trim().split("=")[1]);
+      return;
     }
   }
 }

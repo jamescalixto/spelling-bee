@@ -1,3 +1,14 @@
+---
+title: "Spelling Bee"
+date: 2020-06-14T02:52:22-04:00
+slug: "spelling-bee"
+type: "standalone"
+tags: ["project"]
+forward: ""
+summary: "A homegrown version of the entertaining New York Times puzzle."
+draft: false
+---
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -159,7 +170,8 @@
             <li>Four-letter words are worth 1 point.</li>
             <li>Five-letter words and longer are worth 1 point for each letter.</li>
             <li>Pangrams — words that use all seven letters — earn an additional bonus of 7 points. There is at least
-              one pangram per puzzle.<b id="explanation-hmm"></b></li>
+              one
+              pangram per puzzle.<b id="explanation-hmm"></b></li>
           </ul>
         </p>
         <p>
@@ -187,12 +199,12 @@
       <div class="popup-content-text">
         <div id="prev-letters-container"></div>
         <div id="prev-stats">
-          <span id="prev-stats-words-found"></span><span id="prev-stats-words"></span> words |
-          <span id="prev-stats-points-found"></span><span id="prev-stats-points"></span> points</div>
+          <span id="prev-stats-words-found"></span><span id="prev-stats-words"></span>&nbsp;words |&nbsp;<span
+            id="prev-stats-points-found"></span><span id="prev-stats-points"></span>&nbsp;points</div>
         <div id="prev-words-container"></div>
       </div>
       <p class="popup-content-text">
-        Highlighted letters indicate the required letter. Highlighted words indicate pangrams. <span
+        The highlighted letter indicates the required letter. Highlighted words indicate pangrams. <span
           id="popup-content-text-entered" class="hidden">Bolded words indicate the words you found.</span>
       </p>
       <p class="popup-content-text">
@@ -219,9 +231,10 @@
   <div id="return-popup" class="popup hidden">
     <div id="popup-content-alt">
       <h1 class="return-popup-header">Welcome back!</h1>
-      <p id="return-text">You've achieved the rank of <b id="return-rank"></b> by finding <b id="return-words"></b> for
+      <p id="return-text">You've achieved the rank of&nbsp;<b id="return-rank"></b>&nbsp;by finding&nbsp;<b
+          id="return-words"></b>&nbsp;for
         <b id="return-points"></b>.</p>
-      <p id="return-countdown">How far can you get in the next <b id="return-countdown-span">day</b>?</p>
+      <p id="return-countdown">How far can you get in the next&nbsp;<b id="return-countdown-span">day</b>?</p>
     </div>
     <span id="popup-exit-alt" onclick="hideReturnPopup()"></span>
   </div>
@@ -230,9 +243,9 @@
     <div id="popup-content-alt">
       <img id="victory-img" src="img/victory.svg">
       <h1>Excellent work!</h1>
-      <p id="victory-text">You've reached the highest rank, with <b id="victory-words"></b> and <b
+      <p id="victory-text">You've reached the highest rank, with&nbsp;<b id="victory-words"></b>&nbsp;and&nbsp;<b
           id="victory-points"></b>.</p>
-      <p id="victory-countdown">Check back in <b id="victory-countdown-span">a bit</b> for a new puzzle.</p>
+      <p id="victory-countdown">Check back in&nbsp;<b id="victory-countdown-span">a bit</b>&nbsp;for a new puzzle.</p>
     </div>
     <span id="popup-exit-alt" onclick="hideVictoryPopup()"></span>
   </div>
@@ -241,8 +254,10 @@
     <div id="popup-content-alt">
       <img id="all-img" src="img/fireworks.svg">
       <h1>Spectacular!</h1>
-      <p id="all-text">You've found all <b id="all-words"></b>, worth <b id="all-points"></b>. Truly incredible.</p>
-      <p id="all-countdown">Check back in <b id="all-countdown-span">a bit</b> for a new puzzle.</p>
+      <p id="all-text">You've found all&nbsp;<b id="all-words"></b>, worth&nbsp;<b id="all-points"></b>. Truly
+        incredible.
+      </p>
+      <p id="all-countdown">Check back in&nbsp;<b id="all-countdown-span">a bit</b>&nbsp;for a new puzzle.</p>
     </div>
     <span id="popup-exit-alt" onclick="hideAllPopup()"></span>
   </div>
