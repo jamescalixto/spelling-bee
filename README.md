@@ -4,7 +4,7 @@ Repository for my [Spelling Bee](https://jamescalixto.com/site/wp-content/upload
 
 ## Background
 
-This is a homegrown version of the New York Times' [Spelling Bee](https://www.nytimes.com/puzzles/spelling-bee) puzzle.
+This is a homegrown version of the New York Times' [Spelling Bee](https://www.nytimes.com/puzzles/spelling-bee) puzzle, licensed with the MIT License.
 
 ## Design decisions
 
