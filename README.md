@@ -1,6 +1,6 @@
 # Spelling Bee
 
-Repository for my [Spelling Bee](https://jamescalixto.com/site/wp-content/uploads/media/spelling-bee/main.html) project. Check it out!
+Repository for my [Spelling Bee](https://jamescalixto.com/spelling-bee/) project. Check it out!
 
 ## Background
 
